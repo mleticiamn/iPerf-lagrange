@@ -16,11 +16,10 @@ def gen_traffic(time_points, traffic_levels, duration):
     cur_time = time.localtime().tm_hour + (time.localtime().tm_min/60) + (time.localtime().tm_sec/3600)
     bandwidth = lagrange_interp(cur_time, time_points, traffic_levels)
     
-    # Adding a sanity check for bandwidth value
     if bandwidth < 0:
         bandwidth = 0
-    if bandwidth > 100:
-        bandwidth = 100  # Cap the bandwidth to 100 Mbps as an example
+    if bandwidth > 50:
+        bandwidth = 50
     
     print(f"Current time: {cur_time:.2f}h, Interpolated bandwidth: {bandwidth:.2f} Mbps")
     
@@ -36,7 +35,7 @@ def main():
     
     while True:
         gen_traffic(time_points, traffic_levels, duration)
-        time.sleep(60)  # Wait 60 seconds before generating traffic again
+        #time.sleep(60) 
 
 if __name__ == '__main__':
     main()
