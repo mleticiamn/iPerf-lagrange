@@ -20,13 +20,10 @@ def gen_traffic(time_points, traffic_levels, duration):
         bandwidth = 0
     if bandwidth > 50:
         bandwidth = 50
-    
-    print(f"Current time: {cur_time:.2f}h, Interpolated bandwidth: {bandwidth:.2f} Mbps")
-    
-    try:
-        os.system(f"iperf -c 127.0.0.1 -u -b {bandwidth}M -i 1 -t {duration}")
-    except Exception as e:
-        print(f"Error generating traffic: {e}")
+
+    os.system(f"iperf -c 127.0.0.1 -u -b {bandwidth}M -i 1 -t {duration}")
+    print(f"\ntraffic interpolated at {cur_time:.2f}h\n")
+
 
 def main():
     time_points = [6, 9, 12, 15, 18, 21]
@@ -35,7 +32,7 @@ def main():
     
     while True:
         gen_traffic(time_points, traffic_levels, duration)
-        #time.sleep(60) 
+        time.sleep(10) 
 
 if __name__ == '__main__':
     main()
